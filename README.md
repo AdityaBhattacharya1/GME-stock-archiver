@@ -8,7 +8,7 @@
 A Matplotlib app which displays the stock value of GameStop after the recent _boom_, so to say. <br />
 The app measures the prices before, during and after the sudden growth in value.
 
-# What Happened?
+# But Why GME?
 
 [Here's what happened.](https://www.usatoday.com/in-depth/news/2021/01/28/gamestop-how-did-stock-price-jump-so-quickly/4293221001/)
 
