@@ -5,13 +5,25 @@ import datetime as dt
 from datetime import timedelta
 
 
+"""
+    Key:
+    Default values -
+    1. Start date: Date of day 31 days prior to today
+    eg: If today is 1st Jan, default is 1st Dec
+
+    2. End date: Today's date
+"""
+
+
 def date_setter(str_value, phonetic):
-    return int(input(f'Enter the {str_value} {phonetic} which the stock value should be counted \n'))
+    return int(input(f'Enter the {str_value} {phonetic} which the stock value should be counted [1980-Today]\n'))
 
 
 # Setting empty values of the start and end date or else it throws an error
 start_date = None
 end_date = None
+
+# Validates the date and sets default value in case of error + asks for the value input
 
 
 def date_validator():
@@ -26,14 +38,17 @@ def date_validator():
         end_month = date_setter('month', 'till')
         end_day = date_setter('date of day', 'till')
     except:
-        print('Since numeric value was not entered for either the date, month or year, defaulted to that of 31 days ago')
+        print('Date type error in value of day, month or year; set to default value')
         start_date = dt.datetime.today() - timedelta(days=31)
         end_date = dt.datetime.now()
     else:
         start_date = dt.datetime(start_year, start_month, start_day)
         end_date = dt.datetime(end_year, end_month, end_day)
 
-    if start_year < 1900 or end_date < start_date:
+    # if valid input, all's fine. Else, set default values
+    # 1980 is a rough estimate of the time below which pandas errors out.
+    # Pandas_datareader has the lower extreme of 2010 anyway, so no need of validating that.
+    if start_year < 1980 or end_date < start_date:
         print(
             "Invalid year value. Set to default value(s) [Defaults: start date is that of 31 days ago, end date is today's date]")
         start_date = dt.datetime.today() - timedelta(days=31)
@@ -42,13 +57,16 @@ def date_validator():
     return start_date, end_date
 
 
+# List of possible graph types
 graph_types = ['candle', 'line', 'ohlc', 'renko', 'pnf']
 
 stock_name = input('Enter the name of the stock\n')
+
 graph_type = input(
     'Enter type of graph\n [Options available: candle, line, ohlc, renko, pnf]\n')
+
 mav_val = int(input(
-    'Enter the moving average value\n'))
+    'Enter the moving average value (1-9)\n'))
 
 if not graph_type in graph_types:
     print('Invalid graph type, defaulted to candlestick')
@@ -68,7 +86,7 @@ colours = mpf.make_marketcolors(
     down="r",  # red
     wick={'up': 'lime', 'down': 'orange'},
     edge="inherit",
-    volume="in",
+    volume="in",  # in = inherit
     ohlc='in')
 
 mpf_style = mpf.make_mpf_style(
