@@ -92,15 +92,15 @@ colours = mpf.make_marketcolors(
 mpf_style = mpf.make_mpf_style(
     base_mpf_style="nightclouds", marketcolors=colours)
 
-# The double new-line escapes because the title would stick to the option bar.
-# The new lines act as psuedo-styles as there is no option available for styling the titles (yet).
+
 # What is this 'mav', you ask? Here's an ELI5 link:
 # https://www.reddit.com/r/explainlikeimfive/comments/a7pbys/eli5_what_is_a_moving_average_how_is_it_different/
 # tl;dr it is the average of the most recent values.
 # The value of the mav determines how many days are counted in the average.
+
 # The show_nontrading boolean includes the non-trading days (holidays, etc.) in the graph.
-
-
+# The double new-line escapes because the title would stick to the option bar.
+# The new lines act as psuedo-styles as there is no option available for styling the titles (yet).
 mpf.plot(data, title=f"\n\n {stock_name} stock value\n",
          type=f"{graph_type if graph_type in graph_types else 'candlestick'}",
          style=mpf_style, volume=True, mav=mav_val, show_nontrading=False)
