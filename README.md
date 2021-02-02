@@ -73,6 +73,16 @@ pip install -r requirements.txt
 python main.py
 ```
 
+# Usage
+
+After running `python main.py` in a command prompt, you will be asked to enter the various values of the attributes.
+<br /><br />
+<img src="./cmd-img.png">
+
+# License
+
+Distributed under the MIT License. See `LICENSE` for more information.
+
 ## Sources
 
 For the explanation of the different types of graphs:
